@@ -31,7 +31,7 @@ def load_ai_system():
         embedding_function=embed_model
     )
     # Tăng k lên 7 để tra cứu sâu hơn
-    retriever = vector_db.as_retriever(search_kwargs={"k": 7})
+    retriever = vector_db.as_retriever(search_kwargs={"k": 10})
 
     return client, retriever
 
