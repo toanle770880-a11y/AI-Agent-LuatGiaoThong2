@@ -163,15 +163,14 @@ tab1, tab2 = st.tabs(["💬 Hỏi đáp", "📝 Trắc nghiệm"])
 with tab1:
     st.header("💬 Chat & Nhận diện hình ảnh")
     
-    # 1. Khu vực nhập liệu (Luôn ở trên cùng)
+    # 1. Khu vực nhập liệu (Giữ nguyên)
     uploaded_file = st.file_uploader("🖼️ Đính kèm ảnh (biển báo, tình huống...)", type=["jpg", "jpeg", "png"])
     
-    # ✅ THÊM DÒNG NÀY: Để ảnh hiện ra ngay khi vừa add ảnh
     if uploaded_file is not None:
         st.image(uploaded_file, caption="Ảnh đang chọn", width=250)
     
     with st.form(key='chat_form', clear_on_submit=True):
-        user_input = st.text_input("Nhập câu hỏi tại đây:", placeholder="VD: Biển báo này có ý nghĩa gì?...")
+        user_input = st.text_input("Nhập câu hỏi tại đây:", placeholder="VD: Biển báo này có ý năng gì?...")
         submit_button = st.form_submit_button(label='Gửi câu hỏi 🚀')
 
     # 2. Xử lý Logic khi nhấn nút Gửi
@@ -186,15 +185,26 @@ with tab1:
             if uploaded_file is not None:
                 import PIL.Image
                 current_image = PIL.Image.open(uploaded_file)
-                visual_prompt = f"Bạn là chuyên gia Luật Giao thông. Hãy nhìn ảnh và trả lời: {user_input}"
+                # TỐI ƯU PROMPT CHO VISION
+                visual_prompt = (
+                    f"Bạn là chuyên gia Luật Giao thông. Hãy nhìn ảnh thật kỹ và trả lời: {user_input}. "
+                    f"Nếu là biển báo, hãy mô tả chi tiết màu sắc, hình dáng biển đó."
+                )
                 answer = call_gemini_smart(visual_prompt, image=current_image)
             else:
                 docs = retriever.invoke(user_input)
                 context = "\n".join([doc.page_content for doc in docs])
-                rag_prompt = f"DỮ LIỆU LUẬT: {context}\nCÂU HỎI: {user_input}"
+                # TỐI ƯU PROMPT CHO RAG (CHIÊU 3)
+                rag_prompt = (
+                    f"DỮ LIỆU LUẬT: {context}\n"
+                    f"CÂU HỎI: {user_input}\n\n"
+                    f"HƯỚNG DẪN: Nếu câu hỏi về biển báo hoặc vạch kẻ đường, ngoài việc nêu mức phạt, "
+                    f"hãy mô tả chi tiết đặc điểm nhận dạng của biển báo đó (hình dáng, màu sắc, hình vẽ bên trong) "
+                    f"để người dùng dễ hình dung mà không cần xem ảnh."
+                )
                 answer = call_gemini_smart(rag_prompt)
 
-        # Lưu vào lịch sử (kèm ảnh nếu có)
+        # Lưu vào lịch sử (Giữ nguyên cấu trúc cũ)
         st.session_state.messages.append({
             "role": "assistant", 
             "content": answer,
@@ -202,7 +212,7 @@ with tab1:
         })
         st.rerun()
 
-    # 3. Hiển thị tin nhắn (Đảo ngược, câu mới nhất ở trên)
+    # 3. Hiển thị tin nhắn (Giữ nguyên chức năng cũ)
     if "messages" in st.session_state:
         for m in reversed(st.session_state.messages):
             with st.chat_message(m["role"]):
