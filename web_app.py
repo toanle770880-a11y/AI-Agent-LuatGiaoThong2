@@ -150,6 +150,18 @@ quiz_data = [
         "answer": "B",
         "explanation": "💡 **Phân tích sa hình:**\n\n1. **Quy tắc xe ưu tiên:** Theo Luật Giao thông đường bộ, thứ tự xe ưu tiên được quy định như sau: Xe chữa cháy (cứu hỏa) $\\rightarrow$ Xe quân sự, xe công an $\\rightarrow$ Xe cứu thương.\n2. **Áp dụng:** Trong hình có 2 xe ưu tiên, đối chiếu theo luật thì xe cứu hỏa có quyền ưu tiên cao nhất, sau đó mới đến xe cứu thương. Xe con là xe bình thường đi cuối cùng.\n\n✅ **Thứ tự đúng:** Xe cứu hỏa -> Xe cứu thương -> Xe con."
     },
+    {
+        "question": "Câu 10: Xe nào được quyền đi trước trong trường hợp này?",
+        "image": "images/sahinh9.png", 
+        "options": [
+            "A. Xe mô tô.", 
+            "B. Xe cứu thương.", 
+            "C. Xe con.", 
+            "D. Xe tải."
+        ],
+        "answer": "B",
+        "explanation": "💡 **Phân tích sa hình:**\n\n1. **Xe ưu tiên:** Trong hình có xe cứu thương đang phát tín hiệu ưu tiên đi làm nhiệm vụ.\n2. **Quy tắc:** Theo Luật Giao thông đường bộ, xe ưu tiên (hỏa táng, quân sự, công an, cứu thương) được quyền đi trước các xe khác khi qua nơi giao nhau, bất kể hướng đi hay biển báo đường ưu tiên.\n3. **Kết luận:** Dù xe mô tô đang ở trên đường ưu tiên, nhưng vẫn phải nhường đường cho **Xe cứu thương** đi trước.\n\n✅ **Đáp án đúng:** B. Xe cứu thương."
+    },
     # (Ông tự copy nốt các câu quiz còn lại của ông vào đây nhé)
 ]
 
