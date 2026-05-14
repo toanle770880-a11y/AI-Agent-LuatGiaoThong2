@@ -219,12 +219,16 @@ with tab1:
                 rag_prompt = (
                     f"DỮ LIỆU LUẬT TRÍCH XUẤT: {context}\n"
                     f"CÂU HỎI CỦA NGƯỜI DÙNG: {user_input}\n\n"
-                    f"YÊU CẦU TRẢ LỜI THEO CẤU TRÚC SAU:\n"
-                    f"1. Căn cứ pháp lý: Dựa vào dữ liệu trên, hãy chỉ rõ hành vi này vi phạm Điều mấy, Khoản mấy của Nghị định.\n"
-                    f"2. Mô tả (nếu là biển báo): Mô tả nhanh ngoại hình biển báo/vạch kẻ đường để người dùng nhận diện.\n"
-                    f"3. Mức xử phạt: Nêu rõ mức phạt tiền cụ thể và các hình thức phạt bổ sung (nếu có) như tước bằng lái.\n"
-                    f"4. Lời khuyên: Một câu nhắc nhở ngắn gọn về an toàn giao thông.\n\n"
-                    f"LƯU Ý: Nếu trong dữ liệu không nêu rõ số Điều, hãy ghi là 'Theo quy định hiện hành'."
+                    f"YÊU CẦU QUAN TRỌNG:\n"
+                    f"1. Xác định đúng đối tượng: Nếu người dùng không nói rõ, hãy mặc định trả lời cho XE MÔ TÔ (XE MÁY).\n"
+                    f"2. Truy xuất chính xác: Tìm trong dữ liệu đoạn nào dành riêng cho phương tiện đó. "
+                    f"Ví dụ: Điều 7 dành cho Mô tô, Điều 5 dành cho Ô tô, Điều 11 dành cho xe thô sơ/vật nuôi.\n"
+                    f"3. Cấu trúc câu trả lời:\n"
+                    f"   - Phương tiện áp dụng: (Ví dụ: Xe mô tô, xe gắn máy).\n"
+                    f"   - Căn cứ pháp lý: (Nêu rõ Điều, Khoản).\n"
+                    f"   - Mức xử phạt: (Lấy đúng con số tương ứng với phương tiện đó).\n"
+                    f"   - Lời khuyên: ....\n"
+                    f"LƯU Ý: Tuyệt đối không lấy mức phạt của xe thô sơ áp dụng cho xe máy."
                 )
                 answer = call_gemini_smart(rag_prompt)
 
