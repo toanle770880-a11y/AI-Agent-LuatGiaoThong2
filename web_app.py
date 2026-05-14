@@ -167,9 +167,16 @@ quiz_data = [
 
 # ----------------- 4. UI -----------------
 st.set_page_config(page_title="Trợ lý Giao thông AI", page_icon="🚦")
-st.title("🚦 Trợ lý Luật Giao thông Việt Nam")
 
-tab1, tab2 = st.tabs(["💬 Hỏi đáp", "📝 Trắc nghiệm"])
+# Chèn logo từ thư mục images vào Sidebar
+# Lưu ý: Nhớ đổi tên file ảnh ICTU thành logo_ictu.png và bỏ vào thư mục images
+st.sidebar.image("images/logo_ictu.png", width=200) 
+
+st.sidebar.markdown("<h3 style='text-align: center;'>ICTU - Đại học Công nghệ Thông tin & Truyền thông</h3>", unsafe_allow_html=True)
+st.sidebar.divider()
+
+st.title("🚦 Trợ lý Luật Giao thông Việt Nam")
+# ------------------------------------------
 
 # ================= TAB 1: HỎI ĐÁP =================
 with tab1:
