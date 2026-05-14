@@ -211,7 +211,7 @@ with tab1:
                     f"Nếu là biển báo, hãy mô tả chi tiết màu sắc, hình dáng biển đó."
                 )
                 answer = call_gemini_smart(visual_prompt, image=current_image)
-           else:
+            else:
                 docs = retriever.invoke(user_input)
                 context = "\n".join([doc.page_content for doc in docs])
                 
