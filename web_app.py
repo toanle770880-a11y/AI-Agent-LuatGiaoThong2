@@ -176,7 +176,8 @@ st.sidebar.markdown("<h3 style='text-align: center;'>ICTU - Đại học Công n
 st.sidebar.divider()
 
 st.title("🚦 Trợ lý Luật Giao thông Việt Nam")
-# ------------------------------------------
+# Thêm dòng này vào ngay trên dòng "with tab1:"
+tab1, tab2 = st.tabs(["💬 Hỏi đáp", "📝 Trắc nghiệm"])
 
 # ================= TAB 1: HỎI ĐÁP =================
 with tab1:
