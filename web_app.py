@@ -211,16 +211,20 @@ with tab1:
                     f"Nếu là biển báo, hãy mô tả chi tiết màu sắc, hình dáng biển đó."
                 )
                 answer = call_gemini_smart(visual_prompt, image=current_image)
-            else:
+           else:
                 docs = retriever.invoke(user_input)
                 context = "\n".join([doc.page_content for doc in docs])
-                # TỐI ƯU PROMPT CHO RAG (CHIÊU 3)
+                
+                # TỐI ƯU PROMPT ĐỂ AI TRÍCH DẪN ĐIỀU LUẬT (CHIÊU 3 + CĂN CỨ LUẬT)
                 rag_prompt = (
-                    f"DỮ LIỆU LUẬT: {context}\n"
-                    f"CÂU HỎI: {user_input}\n\n"
-                    f"HƯỚNG DẪN: Nếu câu hỏi về biển báo hoặc vạch kẻ đường, ngoài việc nêu mức phạt, "
-                    f"hãy mô tả chi tiết đặc điểm nhận dạng của biển báo đó (hình dáng, màu sắc, hình vẽ bên trong) "
-                    f"để người dùng dễ hình dung mà không cần xem ảnh."
+                    f"DỮ LIỆU LUẬT TRÍCH XUẤT: {context}\n"
+                    f"CÂU HỎI CỦA NGƯỜI DÙNG: {user_input}\n\n"
+                    f"YÊU CẦU TRẢ LỜI THEO CẤU TRÚC SAU:\n"
+                    f"1. Căn cứ pháp lý: Dựa vào dữ liệu trên, hãy chỉ rõ hành vi này vi phạm Điều mấy, Khoản mấy của Nghị định.\n"
+                    f"2. Mô tả (nếu là biển báo): Mô tả nhanh ngoại hình biển báo/vạch kẻ đường để người dùng nhận diện.\n"
+                    f"3. Mức xử phạt: Nêu rõ mức phạt tiền cụ thể và các hình thức phạt bổ sung (nếu có) như tước bằng lái.\n"
+                    f"4. Lời khuyên: Một câu nhắc nhở ngắn gọn về an toàn giao thông.\n\n"
+                    f"LƯU Ý: Nếu trong dữ liệu không nêu rõ số Điều, hãy ghi là 'Theo quy định hiện hành'."
                 )
                 answer = call_gemini_smart(rag_prompt)
 
